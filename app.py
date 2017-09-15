@@ -52,6 +52,8 @@ def get_last_chat_id_and_text(updates):
 def send_message(text, chat_id):
     hello = {"Hello", "Hi", "Sup", "hi", "hello"}
     structTime = time.localtime()
+    if (structTime[3] == 8 && structime[4] == 55): 
+        url = URL + "sendMessage?text={}&chat_id={}".format(weather("bucuresti").encode('utf-8'), chat_id)
     if text in hello:
         url = URL + "sendMessage?text={}&chat_id={}".format("Hello there!", chat_id)
     elif "#weather" in text:
@@ -61,9 +63,6 @@ def send_message(text, chat_id):
         else:
             text = text.split()[1]
         url = URL + "sendMessage?text={}&chat_id={}".format(weather(text).encode('utf-8'), chat_id)
-    elif "#daily" in text:
-        if (structTime[3] == 11): 
-            url = URL + "sendMessage?text={}&chat_id={}".format(weather("bucuresti").encode('utf-8'), chat_id)
     else:
         url = URL + "sendMessage?text={}&chat_id={}".format("I`m stupid now...i don`t know much", chat_id)
     get_url(url)
