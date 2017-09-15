@@ -1,7 +1,8 @@
+
 import json 
 import requests
 import time
-import urllib.request, urllib.error, urllib.parse
+import urllib2
 import re
 
 TOKEN = "413360913:AAFkA4qDK3ht2NGEeBdPshhfYbHLz3rxsAE"
@@ -15,8 +16,8 @@ def get_url(url):
 def weather(oras):
     site = "http://www.google.ro/search?q=weather+" + oras
     hdr = {'User-Agent': 'Mozilla/5.0'}
-    req = urllib.request.Request(site,headers=hdr)
-    page = urllib.request.urlopen(req)
+    req = urllib2.Request(site,headers=hdr)
+    page = urllib2.urlopen(req)
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(page,"html.parser")
     soup.prettify("utf-8")
@@ -60,7 +61,7 @@ def send_message(text, chat_id):
             text = text.split()[1]
         url = URL + "sendMessage?text={}&chat_id={}".format(weather(text).encode('utf-8'), chat_id)
     else:
-        url = URL + "sendMessage?text={}&chat_id={}".format("I`m stupid now...i don`t know much".encode('utf-8'), chat_id)
+        url = URL + "sendMessage?text={}&chat_id={}".format("I`m stupid now...i don`t know much", chat_id)
     get_url(url)
     
 def get_last_update_id(updates):
@@ -89,5 +90,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
-
+main()
