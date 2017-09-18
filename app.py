@@ -26,7 +26,23 @@ def weather(oras):
         grade = link.text
         break    
     return oras + " - " + grade
-    
+
+def scores(echipa):
+    site = "http://www.goal.com/en/results/2017-09-17" 
+    list = []
+    hdr = {'User-Agent': 'Mozilla/5.0'}
+    req = urllib2.Request(site,headers=hdr)
+    page = urllib2.urlopen(req)
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(page,"html.parser")
+    soup.prettify("utf-8")
+    for link in soup.findAll("div", { "class" : "match-data" }):
+        if echipa in link.text:
+            bool = True
+            list = link.text.split()
+            return list[1] + " " + list[0] + list[2] + list[3] + " " + list[4]
+        else:
+            return "Team not found..." 
 
 def get_json_from_url(url):
     content = get_url(url)
@@ -62,6 +78,9 @@ def send_message(text, chat_id):
         else:
             text = text.split()[1]
         url = URL + "sendMessage?text={}&chat_id={}".format(weather(text).encode('utf-8'), chat_id)
+    elif "#score" in text:
+        text = text.split()[1]
+        url = URL + "sendMessage?text={}&chat_id={}".format(scores(text).encode('utf-8'), chat_id)
     else:
         url = URL + "sendMessage?text={}&chat_id={}".format("I`m stupid now...i don`t know much", chat_id)
     get_url(url)
