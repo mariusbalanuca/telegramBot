@@ -38,11 +38,9 @@ def scores(echipa):
     soup.prettify("utf-8")
     for link in soup.findAll("div", { "class" : "match-data" }):
         if echipa in link.text:
-            bool = True
-            list = link.text.split()
-            return list[1] + " " + list[0] + list[2] + list[3] + " " + list[4]
+            return link.text
         else:
-            return "Team not found..." 
+            return "No team found..."
 
 def get_json_from_url(url):
     content = get_url(url)
