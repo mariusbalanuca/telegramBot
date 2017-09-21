@@ -13,18 +13,9 @@ def get_url(url):
     return content
     
 def weather(oras):
-    site = "http://www.google.ro/search?q=weather+" + oras
-    hdr = {'User-Agent': 'Mozilla/5.0'}
-    req = urllib2.Request(site,headers=hdr)
-    page = urllib2.urlopen(req)
-    from bs4 import BeautifulSoup
-    soup = BeautifulSoup(page,"html.parser")
-    soup.prettify("utf-8")
-    grade = "not found"
-    for link in soup.findAll("span", { "class" : "wob_t" }):
-        grade = link.text
-        break    
-    return oras + " - " + grade
+    site = "http://api.openweathermap.org/data/2.5/weather?q="+oras+"&appid=631cf33df60fe496c2a9d57992fa99ba"
+    data = json.load(urllib2.urlopen(site))
+    return "%d - %s" % (int(data["main"]["temp"] - 273.15), data["weather"][0]["main"])
 
 def score(team):
     text = "Team not found or doesn`t have a match today"
