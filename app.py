@@ -15,7 +15,7 @@ def get_url(url):
 def weather(oras):
     site = "http://api.openweathermap.org/data/2.5/weather?q="+oras+"&appid=631cf33df60fe496c2a9d57992fa99ba"
     data = json.load(urllib2.urlopen(site))
-    return "%d - %s" % (int(data["main"]["temp"] - 273.15), data["weather"][0]["main"])
+    return oras + ": %d C - %s" % (int(data["main"]["temp"] - 273.15), data["weather"][0]["main"])
 
 def score(team):
     text = "Team not found or doesn`t have a match today"
