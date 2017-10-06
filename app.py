@@ -3,6 +3,7 @@ import requests
 import time
 import urllib2
 import re
+import random
 
 TOKEN = "413360913:AAFkA4qDK3ht2NGEeBdPshhfYbHLz3rxsAE"
 URL = "https://api.telegram.org/bot{}/".format(TOKEN)
