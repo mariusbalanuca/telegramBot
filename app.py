@@ -9,11 +9,11 @@ URL = "https://api.telegram.org/bot{}/".format(TOKEN)
 
 def flipCoin():
   foo = ["tails", "heads"]
-  print random.choice(foo)
+  return random.choice(foo)
   
 def rollDice():
   dice=[1,2,3,4,5,6]
-  print random.choice(dice)
+  return random.choice(dice)
       
 def get_url(url):
     response = requests.get(url)
@@ -100,9 +100,9 @@ def send_message(text, chat_id):
             text = text.split()[1]
         url = URL + "sendMessage?text={}&chat_id={}".format(timee(text).encode('utf-8'), chat_id)
     elif "#dice" in text:
-        url = URL + "sendMessage?text={}&chat_id={}".format(rollDice()).encode('utf-8'), chat_id)
+        url = URL + "sendMessage?text={}&chat_id={}".format(rollDice().encode('utf-8'), chat_id)
     elif "#coin" in text:
-        url = URL + "sendMessage?text={}&chat_id={}".format(flipCoin()).encode('utf-8'), chat_id)
+        url = URL + "sendMessage?text={}&chat_id={}".format(flipCoin().encode('utf-8'), chat_id)
     else:
         url = URL + "sendMessage?text={}&chat_id={}".format("I`m stupid now...i don`t know much", chat_id)
     get_url(url)
