@@ -101,7 +101,7 @@ def send_message(text, chat_id):
             text = text.split()[1]
         url = URL + "sendMessage?text={}&chat_id={}".format(timee(text).encode('utf-8'), chat_id)
     elif "#dice" in text:
-        url = URL + "sendMessage?text={}&chat_id={}".format(rollDice().encode('utf-8'), chat_id)
+        url = URL + "sendMessage?text={}&chat_id={}".format(rollDice(), chat_id)
     elif "#coin" in text:
         url = URL + "sendMessage?text={}&chat_id={}".format(flipCoin().encode('utf-8'), chat_id)
     else:
