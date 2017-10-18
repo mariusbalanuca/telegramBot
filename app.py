@@ -125,12 +125,6 @@ def send_message(text, chat_id):
         url = URL + "sendMessage?text={}&chat_id={}".format(rollDice(), chat_id)
     elif "#coin" in text:
         url = URL + "sendMessage?text={}&chat_id={}".format(flipCoin().encode('utf-8'), chat_id)
-    elif "#price" in text:
-        newprice = 0
-        if newprice < priceCall():
-            newprice = priceCall()
-            url = URL + "sendMessage?text={}&chat_id={}".format(newprice, chat_id)
-        time.sleep(3600)
     else:
         url = URL + "sendMessage?text={}&chat_id={}".format("I`m stupid now...i don`t know much", chat_id)
     get_url(url)
@@ -161,6 +155,7 @@ def main():
             last_update_id = get_last_update_id(updates) + 1
             echo_all(updates)
         time.sleep(0.5)
+    
 
 
 if __name__ == '__main__':
